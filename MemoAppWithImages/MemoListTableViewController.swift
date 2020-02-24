@@ -82,9 +82,7 @@ class MemoListTableViewController: UITableViewController {
         if item.urls.count > 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "WithImageCell", for: indexPath) as! WithImageCell
             let url = URL(string: item.urls[0])
-            let data = try! Data(contentsOf: url!)
-            let image = UIImage(data: data)
-            cell.imageView?.image = image
+            cell.imageView?.image = resizedImage(at: url!, for: CGSize(width: 75, height: 75))
             
             if item.title!.count > 15 {
                 let index = item.title!.index(item.title!.startIndex, offsetBy: 15)
@@ -136,6 +134,28 @@ class MemoListTableViewController: UITableViewController {
             return cell
         }
 
+    }
+    
+    func resizedImage(at url: URL, for size: CGSize) -> UIImage? {
+        guard let imageSource = CGImageSourceCreateWithURL(url as NSURL, nil),
+            let image = CGImageSourceCreateImageAtIndex(imageSource, 0, nil)
+        else {
+            return nil
+        }
+
+        let context = CGContext(data: nil,
+                                width: Int(size.width),
+                                height: Int(size.height),
+                                bitsPerComponent: image.bitsPerComponent,
+                                bytesPerRow: image.bytesPerRow,
+                                space: image.colorSpace ?? CGColorSpace(name: CGColorSpace.sRGB)!,
+                                bitmapInfo: image.bitmapInfo.rawValue)
+        context?.interpolationQuality = .high
+        context?.draw(image, in: CGRect(origin: .zero, size: size))
+
+        guard let scaledImage = context?.makeImage() else { return nil }
+
+        return UIImage(cgImage: scaledImage)
     }
 }
 
