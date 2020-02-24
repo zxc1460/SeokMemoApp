@@ -84,52 +84,14 @@ class MemoListTableViewController: UITableViewController {
             let url = URL(string: item.urls[0])
             cell.imageView?.image = resizedImage(at: url!, for: CGSize(width: 75, height: 75))
             
-            if item.title!.count > 15 {
-                let index = item.title!.index(item.title!.startIndex, offsetBy: 15)
-                let range = item.title!.startIndex..<index
-                let subText = item.title![range]
-                let dotText = String("...")
-                let text = "\(subText)\(dotText)"
-                cell.titlelabel.text = text
-            } else {
-                cell.titlelabel.text = item.title!
-            }
-            
-            if item.content!.count > 20 {
-                let index = item.content!.index(item.content!.startIndex, offsetBy: 20)
-                let range = item.content!.startIndex..<index
-                let subText = item.content![range]
-                let dotText = String("...")
-                let text = "\(subText)\(dotText)"
-                cell.contentLabel.text = text
-            } else {
-                cell.contentLabel.text = item.content!
-            }
+            cell.titlelabel.text = item.title!
+            cell.contentLabel.text = item.content!
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "WithoutImageCell", for: indexPath) as! WithoutImageCell
             
-            if item.title!.count > 20 {
-                let index = item.title!.index(item.title!.startIndex, offsetBy: 20)
-                let range = item.title!.startIndex..<index
-                let subText = item.title![range]
-                let dotText = String("...")
-                let text = "\(subText)\(dotText)"
-                cell.titleLabel.text = text
-            } else {
-                cell.titleLabel.text = item.title!
-            }
-            
-            if item.content!.count > 25 {
-                let index = item.content!.index(item.content!.startIndex, offsetBy: 25)
-                let range = item.content!.startIndex..<index
-                let subText = item.content![range]
-                let dotText = String("...")
-                let text = "\(subText)\(dotText)"
-                cell.contentLabel.text = text
-            } else {
-                cell.contentLabel.text = item.content!
-            }
+            cell.titleLabel.text = item.title!
+            cell.contentLabel.text = item.content!
             
             return cell
         }
