@@ -51,6 +51,17 @@ class MemoWriteViewController: UIViewController{
     }
     
     @IBAction func cancel(_ sender: Any) {
+        if memo == nil {
+            if let dir = folderName {
+                let directoryPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(dir)
+                do {
+                    try FileManager.default.removeItem(at: directoryPath)
+                } catch {
+                    print("디렉토리 삭제 중 에러 발생")
+                }
+            }
+        }
+        // 새로 메모를 만드려는 경우였으
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -149,12 +160,13 @@ class MemoWriteViewController: UIViewController{
             for i in 0..<assets.count {
                 assets[i].getURL { (optionalUrl) in
                     if let url = optionalUrl {
-                        let data = try! Data(contentsOf: url)
-                        let image = UIImage(data: data)
-                        let endIndex = url.lastPathComponent.firstIndex(of: ".")
-                        let name = url.lastPathComponent[..<endIndex!] + ".JPG"
-                        self.saveAndAppend(image: image, name: String(name))
-                        
+                        if let data = try? Data(contentsOf: url) {
+                            if let image = UIImage(data: data) {
+                                let endIndex = url.lastPathComponent.firstIndex(of: ".")
+                                let name = url.lastPathComponent[..<endIndex!] + ".JPG"
+                                self.saveAndAppend(image: image, name: String(name))
+                            }
+                        }
                     }
                 }
             }

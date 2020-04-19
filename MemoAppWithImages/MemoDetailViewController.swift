@@ -157,5 +157,3 @@ extension MemoDetailViewController: UICollectionViewDelegateFlowLayout, UICollec
     
     
 }
-
-

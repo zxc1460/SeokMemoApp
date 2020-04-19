@@ -1,0 +1,30 @@
+PODS:
+  - BSImagePicker (3.0.0)
+  - OpalImagePicker (2.1.2)
+  - Realm (4.3.2):
+    - Realm/Headers (= 4.3.2)
+  - Realm/Headers (4.3.2)
+  - RealmSwift (4.3.2):
+    - Realm (= 4.3.2)
+
+DEPENDENCIES:
+  - BSImagePicker (~> 3.0)
+  - OpalImagePicker (~> 2.1.0)
+  - RealmSwift
+
+SPEC REPOS:
+  trunk:
+    - BSImagePicker
+    - OpalImagePicker
+    - Realm
+    - RealmSwift
+
+SPEC CHECKSUMS:
+  BSImagePicker: 6b9e161f7c430eed28e711558baae1c392c39495
+  OpalImagePicker: 51cbf714f337a93c2631219f1a90389ba936077f
+  Realm: 5e92902e2875dff4bb0fd02f67bb737c3d5db2bc
+  RealmSwift: 9a360fc7bae04fc2e308a34fbd899d5faa2d6b22
+
+PODFILE CHECKSUM: 287c6e5d855b605b158137ee2330c66b5662eb6b
+
+COCOAPODS: 1.8.4

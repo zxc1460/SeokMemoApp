@@ -36,8 +36,8 @@ class MemoListTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.tableView.reloadData()
         super.viewWillAppear(animated)
+        self.tableView.reloadData()
     }
     
 
